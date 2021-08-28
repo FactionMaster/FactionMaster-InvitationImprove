@@ -1,0 +1,6 @@
+SELECT_PLAYER_PANEL_TITLE: "Veuiller choisir le joueur"
+SELECT_PLAYER_PANEL_CONTENT: "Choisissez parmi la liste déroulante"
+SELECT_PLAYER_PANEL_ERROR: " §c>> §4Aucune correspondance n'a été trouvé avec le pseudo : {{needle}}"
+SELECT_FACTION_PANEL_TITLE: "Veuiller choisir la faction"
+SELECT_FACTION_PANEL_CONTENT: "Choisissez parmi la liste déroulante"
+SELECT_FACTION_PANEL_ERROR: " §c>> §4Aucune correspondance n'a été trouvé avec le nom : {{needle}}"

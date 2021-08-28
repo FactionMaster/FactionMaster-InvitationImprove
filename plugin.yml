@@ -1,0 +1,7 @@
+name: FactionMasterInvitationImprove
+author: ShockedPlot7560
+version: 1.0.1
+api: 3.17.7
+main: ShockedPlot7560\FactionMasterInvitationImprove\Main
+softdepend: [FactionMaster]
+description: "Extension which improve invitation system of FactionMaster"
