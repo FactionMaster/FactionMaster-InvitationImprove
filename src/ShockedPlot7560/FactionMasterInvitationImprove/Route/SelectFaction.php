@@ -87,9 +87,10 @@ class SelectFaction implements Route {
     private function createSelectMenu(string $factionName): CustomForm {
         $menu = new CustomForm($this->call());
         $menu->setTitle(Utils::getText($this->UserEntity->name, "SELECT_FACTION_PANEL_TITLE"));
-        $query = MainAPI::$PDO->prepare("SELECT * FROM " . FactionTable::TABLE_NAME . " WHERE INSTR(name, :needle) > 0 LIMIT " . FactionMasterInvitationImproveMain::getConfigF("limit-selected-faction"));
+        $query = MainAPI::$PDO->prepare("SELECT * FROM " . FactionTable::TABLE_NAME . " WHERE INSTR(name, :needle) > 0 AND name != :factionName LIMIT " . FactionMasterInvitationImproveMain::getConfigF("limit-selected-faction"));
         $query->execute([
-            "needle" => $factionName
+            "needle" => $factionName,
+            "factionName" => $this->UserEntity->faction
         ]);
         $this->options = [];
         foreach ($query->fetchAll(PDO::FETCH_CLASS, FactionEntity::class) as $faction) {
