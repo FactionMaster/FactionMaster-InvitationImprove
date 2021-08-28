@@ -4,4 +4,4 @@
 
 It will display a new window where you can choose between a list corresponding to your input.
 This works with players and factions registered on the server!
-![Panel Example](.github/panel_example.png?raw=true)
+![Panel Example](.github/panel_example.PNG?raw=true)
