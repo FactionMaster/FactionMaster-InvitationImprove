@@ -56,10 +56,12 @@ class Main extends PluginBase implements Extension{
         @mkdir($this->getDataFolder());
         $this->saveDefaultConfig();
         $this->saveResource('fr_FR.yml');
+        $this->saveResource('en_EN.yml');
         $this->saveResource('config.yml');
         $this->config = new Config($this->getDataFolder() . "config.yml");
         $this->LangConfig = [
-            "fr_FR" => new Config($this->getDataFolder() . "fr_FR.yml", Config::YAML)
+            "fr_FR" => new Config($this->getDataFolder() . "fr_FR.yml", Config::YAML),
+            "en_EN" => new Config($this->getDataFolder() . "en_EN.yml", Config::YAML)
         ];
     }
 
