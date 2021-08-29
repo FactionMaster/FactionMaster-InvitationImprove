@@ -35,7 +35,7 @@ namespace ShockedPlot7560\FactionMasterInvitationImprove;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 use ShockedPlot7560\FactionMaster\Extension\Extension;
-use ShockedPlot7560\FactionMaster\Main as FactionMasterMain;
+use ShockedPlot7560\FactionMaster\Main;
 use ShockedPlot7560\FactionMaster\Route\RouterFactory;
 use ShockedPlot7560\FactionMasterInvitationImprove\Route\NewAllianceInvitation;
 use ShockedPlot7560\FactionMasterInvitationImprove\Route\NewInvitation;
@@ -43,15 +43,14 @@ use ShockedPlot7560\FactionMasterInvitationImprove\Route\NewMemberInvitation;
 use ShockedPlot7560\FactionMasterInvitationImprove\Route\SelectFaction;
 use ShockedPlot7560\FactionMasterInvitationImprove\Route\SelectPlayer;
 
-class Main extends PluginBase implements Extension{
+class InvitationImprove extends PluginBase implements Extension{
 
     private $LangConfig = [];
     private static $instance;
 
-    public function onLoad()
-    {
+    public function onLoad(): void{
         self::$instance = $this;
-        FactionMasterMain::getInstance()->getExtensionManager()->registerExtension($this);
+        Main::getInstance()->getExtensionManager()->registerExtension($this);
 
         @mkdir($this->getDataFolder());
         $this->saveDefaultConfig();

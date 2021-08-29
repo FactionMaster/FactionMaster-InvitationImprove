@@ -42,7 +42,7 @@ use ShockedPlot7560\FactionMaster\Database\Table\FactionTable;
 use ShockedPlot7560\FactionMaster\Route\Route;
 use ShockedPlot7560\FactionMaster\Route\RouterFactory;
 use ShockedPlot7560\FactionMaster\Utils\Utils;
-use ShockedPlot7560\FactionMasterInvitationImprove\Main as FactionMasterInvitationImproveMain;
+use ShockedPlot7560\FactionMasterInvitationImprove\InvitationImprove;
 
 class SelectFaction implements Route {
 
@@ -87,7 +87,7 @@ class SelectFaction implements Route {
     private function createSelectMenu(string $factionName): CustomForm {
         $menu = new CustomForm($this->call());
         $menu->setTitle(Utils::getText($this->UserEntity->name, "SELECT_FACTION_PANEL_TITLE"));
-        $query = MainAPI::$PDO->prepare("SELECT * FROM " . FactionTable::TABLE_NAME . " WHERE INSTR(name, :needle) > 0 AND name != :factionName LIMIT " . FactionMasterInvitationImproveMain::getConfigF("limit-selected-faction"));
+        $query = MainAPI::$PDO->prepare("SELECT * FROM " . FactionTable::TABLE_NAME . " WHERE INSTR(name, :needle) > 0 AND name != :factionName LIMIT " . InvitationImprove::getConfigF("limit-selected-faction"));
         $query->execute([
             "needle" => $factionName,
             "factionName" => $this->UserEntity->faction
