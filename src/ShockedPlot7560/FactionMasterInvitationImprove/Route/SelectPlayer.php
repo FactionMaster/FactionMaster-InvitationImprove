@@ -41,7 +41,7 @@ use ShockedPlot7560\FactionMaster\Database\Table\UserTable;
 use ShockedPlot7560\FactionMaster\Route\Route;
 use ShockedPlot7560\FactionMaster\Route\RouterFactory;
 use ShockedPlot7560\FactionMaster\Utils\Utils;
-use ShockedPlot7560\FactionMasterInvitationImprove\InvitationImprove;
+use ShockedPlot7560\FactionMasterInvitationImprove\Main;
 
 class SelectPlayer implements Route {
 
@@ -86,16 +86,12 @@ class SelectPlayer implements Route {
     private function createSelectMenu(string $playerName): CustomForm {
         $menu = new CustomForm($this->call());
         $menu->setTitle(Utils::getText($this->UserEntity->name, "SELECT_PLAYER_PANEL_TITLE"));
-        $query = MainAPI::$PDO->prepare("SELECT * FROM " . UserTable::TABLE_NAME . " WHERE INSTR(name, :needle) > 0 AND name != :playerName LIMIT " . InvitationImprove::getConfigF("limit-selected-player"));
-        $query->execute([
-            "needle" => $playerName,
-            "playerName" => $this->UserEntity->name
-        ]);
         $this->options = [];
-        foreach ($query->fetchAll(PDO::FETCH_CLASS, UserEntity::class) as $user) {
-            $this->options[] = $user->name;
+        foreach (MainAPI::$users as $name => $user) {
+            if (strpos($name, $playerName) !== false && $name !== $this->UserEntity->name) {
+                $this->options[] = $user->name;
+            }
         }
-        if (MainAPI::getUser($playerName) instanceof UserEntity) $this->options[] = $playerName;
         if (count($this->options) != 0) {
             $menu->addDropdown(Utils::getText($this->UserEntity->name, "SELECT_PLAYER_PANEL_CONTENT"), $this->options);
             $this->menuActive = true;
