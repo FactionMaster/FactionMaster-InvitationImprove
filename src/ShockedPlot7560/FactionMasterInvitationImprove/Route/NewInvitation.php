@@ -88,7 +88,7 @@ class NewInvitation extends RouteNewInvitation implements Route {
                                             },
                                             function () use ($Player, $FactionRequest) {
                                                 (new FactionJoinEvent($Player, $FactionRequest))->call();
-                                                Utils::processMenu(RouterFactory::get(MainPanel::SLUG), $Player, [Utils::getText($this->UserEntity->name, "SUCCESS_JOIN_FACTION", ['factionName' => $FactionRequest->name])] );
+                                                Utils::processMenu(RouterFactory::get(MainPanel::SLUG), $Player, [Utils::getText($this->user->name, "SUCCESS_JOIN_FACTION", ['factionName' => $FactionRequest->name])] );
                                             },
                                             function () use ($Player) {
                                                 Utils::processMenu(RouterFactory::get(self::SLUG), $Player, [Utils::getText($Player->getName(), "ERROR")]);

@@ -54,6 +54,7 @@ class SelectPlayer implements Route {
     /** @var bool */
     private $menuActive = false;
     private $options = [];
+    private $UserEntity;
 
     public function getSlug(): string
     {
@@ -73,7 +74,10 @@ class SelectPlayer implements Route {
         }else{
             throw new InvalidArgumentException("\$params has not the good format");
         }
-        if (isset($params[0]) && $params[0] == "") return Utils::processMenu(RouterFactory::get($this->backMenu), $player);
+        if (isset($params[0]) && $params[0] == "") {
+            Utils::processMenu(RouterFactory::get($this->backMenu), $player);
+            return;
+        }
         $menu = $this->createSelectMenu($playerName);
         $player->sendForm($menu);
     }

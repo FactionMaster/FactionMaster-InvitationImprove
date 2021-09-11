@@ -94,7 +94,7 @@ class SelectFaction implements Route {
 
     private function createSelectMenu(string $factionName): CustomForm {
         $menu = new CustomForm($this->call());
-        $menu->setTitle(Utils::getText($this->UserEntity->name, "SELECT_FACTION_PANEL_TITLE"));
+        $menu->setTitle(Utils::getText($this->user->name, "SELECT_FACTION_PANEL_TITLE"));
         $this->options = [];
         foreach (MainAPI::$factions as $name => $faction) {
             if (strpos($name, $factionName) !== false && $name !== $this->UserEntity->faction) {
