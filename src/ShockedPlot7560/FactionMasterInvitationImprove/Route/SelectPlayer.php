@@ -100,7 +100,7 @@ class SelectPlayer implements Route {
         $menu->setTitle(Utils::getText($this->UserEntity->name, "SELECT_PLAYER_PANEL_TITLE"));
         $this->options = [];
         foreach (MainAPI::$users as $name => $user) {
-            if (strpos($name, $playerName) !== false && $name !== $this->UserEntity->name) {
+            if (strpos($name, $playerName) !== false && $name !== $this->UserEntity->name && count($this->options) < Main::getConfigF("limit-selected-player")) {
                 $this->options[] = $user->name;
             }
         }

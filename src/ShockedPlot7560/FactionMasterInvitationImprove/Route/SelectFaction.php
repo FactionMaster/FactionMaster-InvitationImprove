@@ -97,7 +97,7 @@ class SelectFaction implements Route {
         $menu->setTitle(Utils::getText($this->UserEntity->name, "SELECT_FACTION_PANEL_TITLE"));
         $this->options = [];
         foreach (MainAPI::$factions as $name => $faction) {
-            if (strpos($name, $factionName) !== false && $name !== $this->UserEntity->faction) {
+            if (strpos($name, $factionName) !== false && $name !== $this->UserEntity->faction && count($this->options) < Main::getConfigF("limit-selected-faction")) {
                 $this->options[] = $faction->name;
             }
         }
