@@ -32,7 +32,7 @@
 
 namespace ShockedPlot7560\FactionMasterInvitationImprove\Route;
 
-use jojoe77777\FormAPI\CustomForm;
+use ShockedPlot7560\FactionMaster\libs\jojoe77777\FormAPI\CustomForm;
 use PDO;
 use pocketmine\Player;
 use ShockedPlot7560\FactionMaster\API\MainAPI;
