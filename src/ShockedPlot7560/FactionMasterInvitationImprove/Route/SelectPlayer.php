@@ -32,6 +32,7 @@
 
 namespace ShockedPlot7560\FactionMasterInvitationImprove\Route;
 
+use InvalidArgumentException;
 use ShockedPlot7560\FactionMaster\libs\jojoe77777\FormAPI\CustomForm;
 use PDO;
 use pocketmine\Player;
@@ -65,9 +66,13 @@ class SelectPlayer implements Route {
      */
     public function __invoke(Player $player, UserEntity $User, array $UserPermissions, ?array $params = null) {
         $this->UserEntity = $User;
-        if (isset($params[0]) && \is_string($params[0])) $playerName = $params[0];
-        if (isset($params[1]) && is_callable($params[1])) $this->callable = $params[1];
-        if (isset($params[2]) && \is_string($params[2])) $this->backMenu = $params[2];
+        if (count($params) > 3) {
+            $playerName = $params[0];
+            $this->callable = $params[1];
+            $this->backMenu = $params[2];
+        }else{
+            throw new InvalidArgumentException("\$params has not the good format");
+        }
         if (isset($params[0]) && $params[0] == "") return Utils::processMenu(RouterFactory::get($this->backMenu), $player);
         $menu = $this->createSelectMenu($playerName);
         $player->sendForm($menu);
@@ -78,7 +83,10 @@ class SelectPlayer implements Route {
         $callable = $this->callable;
         return function (Player $Player, $data) use ($backMenu, $callable) {
             if ($data === null || !isset($backMenu) || !isset($callable)) return;
-            if (!$this->menuActive) return Utils::processMenu(RouterFactory::get($backMenu), $Player);
+            if (!$this->menuActive) {
+                Utils::processMenu(RouterFactory::get($backMenu), $Player);
+                return;
+            }
             call_user_func($callable, $this->options[$data[0]]);
         };
     }
