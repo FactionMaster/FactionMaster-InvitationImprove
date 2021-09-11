@@ -67,7 +67,7 @@ class SelectPlayer implements Route {
      */
     public function __invoke(Player $player, UserEntity $User, array $UserPermissions, ?array $params = null) {
         $this->UserEntity = $User;
-        if (count($params) > 3) {
+        if (count($params) >= 3) {
             $playerName = $params[0];
             $this->callable = $params[1];
             $this->backMenu = $params[2];
