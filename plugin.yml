@@ -3,5 +3,6 @@ author: ShockedPlot7560
 version: 1.1.0
 api: 3.17.7
 main: ShockedPlot7560\FactionMasterInvitationImprove\Main
-softdepend: [FactionMaster]
+depend: ["FactionMaster"]
+virions: ["libFormAPI"]
 description: "Extension which improve invitation system of FactionMaster"
