@@ -63,8 +63,6 @@ class NewMemberInvitation extends MembersSendInvitationRoute {
                         Utils::processMenu(RouterFactory::get(self::SLUG), $player, [Utils::getText($this->getUserEntity()->getName(), "MAX_PLAYER_REACH")]);
                         return;
                     }
-                    var_dump("ok");
-                    var_dump($playerName);
                     if ($userRequested instanceof UserEntity) {
                         $factionName = $faction->getName();
                         if (!MainAPI::getFactionOfPlayer($targetName) instanceof FactionEntity) {

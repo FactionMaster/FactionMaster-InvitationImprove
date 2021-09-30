@@ -87,12 +87,10 @@ class SelectPlayer extends RouteBase implements Route {
     public function call() : callable{
         return function (Player $player, $data) {
             if ($data === null) return;
-            var_dump($this->getCallable());
             if (!$this->menuActive) {
                 Utils::processMenu($this->getBackRoute(), $player);
                 return;
             }
-            var_dump($this->getOptions()[$data[0]]);
             call_user_func($this->getCallable(), $this->getOptions()[$data[0]]);
         };
     }
