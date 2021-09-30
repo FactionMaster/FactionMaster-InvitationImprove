@@ -34,81 +34,83 @@ namespace ShockedPlot7560\FactionMasterInvitationImprove\Route;
 
 use InvalidArgumentException;
 use ShockedPlot7560\FactionMaster\libs\jojoe77777\FormAPI\CustomForm;
-use PDO;
 use pocketmine\Player;
 use ShockedPlot7560\FactionMaster\API\MainAPI;
 use ShockedPlot7560\FactionMaster\Database\Entity\UserEntity;
-use ShockedPlot7560\FactionMaster\Database\Table\UserTable;
 use ShockedPlot7560\FactionMaster\Route\Route;
-use ShockedPlot7560\FactionMaster\Route\RouterFactory;
+use ShockedPlot7560\FactionMaster\Route\RouteBase;
 use ShockedPlot7560\FactionMaster\Utils\Utils;
-use ShockedPlot7560\FactionMasterInvitationImprove\Main;
+use ShockedPlot7560\FactionMasterInvitationImprove\FactionMasterInvitationImprove;
 
-class SelectPlayer implements Route {
+class SelectPlayer extends RouteBase implements Route {
 
     const SLUG = "selectPlayer";
 
-    public $PermissionNeed = [];
-    public $callable;
-    public $backMenu;
     /** @var bool */
     private $menuActive = false;
     private $options = [];
-    private $UserEntity;
 
-    public function getSlug(): string
-    {
+    public function getSlug(): string {
         return self::SLUG;
     }
 
-    /**
-     * @param Player $player
-     * @param array|null $params Give to first item the message to print if wanted
-     */
-    public function __invoke(Player $player, UserEntity $User, array $UserPermissions, ?array $params = null) {
-        $this->UserEntity = $User;
+    public function getPermissions(): array {
+        return [];
+    }
+
+    public function getBackRoute(): ?Route {
+        return $this->getParams()[2];
+    }
+
+    protected function getCallable(): callable {
+        return $this->getParams()[1];
+    }
+
+    protected function getOptions(): array {
+        return $this->options;
+    }
+
+    public function __invoke(Player $player, UserEntity $userEntity, array $userPermissions, ?array $params = null) {
+        $this->init($player, $userEntity, $userPermissions, $params);
         if (count($params) >= 3) {
             $playerName = $params[0];
-            $this->callable = $params[1];
-            $this->backMenu = $params[2];
         }else{
             throw new InvalidArgumentException("\$params has not the good format");
         }
         if (isset($params[0]) && $params[0] == "") {
-            Utils::processMenu(RouterFactory::get($this->backMenu), $player);
+            Utils::processMenu($this->getBackRoute(), $player);
             return;
         }
-        $menu = $this->createSelectMenu($playerName);
-        $player->sendForm($menu);
+        $player->sendForm($this->getForm($playerName));
     }
 
     public function call() : callable{
-        $backMenu = $this->backMenu;
-        $callable = $this->callable;
-        return function (Player $Player, $data) use ($backMenu, $callable) {
-            if ($data === null || !isset($backMenu) || !isset($callable)) return;
+        return function (Player $player, $data) {
+            if ($data === null) return;
+            var_dump($this->getCallable());
             if (!$this->menuActive) {
-                Utils::processMenu(RouterFactory::get($backMenu), $Player);
+                Utils::processMenu($this->getBackRoute(), $player);
                 return;
             }
-            call_user_func($callable, $this->options[$data[0]]);
+            var_dump($this->getOptions()[$data[0]]);
+            call_user_func($this->getCallable(), $this->getOptions()[$data[0]]);
         };
     }
 
-    private function createSelectMenu(string $playerName): CustomForm {
+    private function getForm(string $playerName): CustomForm {
         $menu = new CustomForm($this->call());
-        $menu->setTitle(Utils::getText($this->UserEntity->name, "SELECT_PLAYER_PANEL_TITLE"));
+        $menu->setTitle(Utils::getText($this->getUserEntity()->getName(), "SELECT_PLAYER_PANEL_TITLE"));
         $this->options = [];
         foreach (MainAPI::$users as $name => $user) {
-            if (strpos($name, $playerName) !== false && $name !== $this->UserEntity->name && count($this->options) < Main::getConfigF("limit-selected-player")) {
-                $this->options[] = $user->name;
+            if (strpos($name, $playerName) !== false && $name !== $this->getUserEntity()->getName() && count($this->getOptions()) < FactionMasterInvitationImprove::getConfigF("limit-selected-player")) {
+                $this->options[] = $user->getName();
             }
         }
-        if (count($this->options) != 0) {
-            $menu->addDropdown(Utils::getText($this->UserEntity->name, "SELECT_PLAYER_PANEL_CONTENT"), $this->options);
+        if (count($this->getOptions()) != 0) {
+            $menu->addDropdown(Utils::getText($this->getUserEntity()->getName(), "SELECT_PLAYER_PANEL_CONTENT"), $this->getOptions());
             $this->menuActive = true;
         }else{
-            $menu->addLabel(Utils::getText($this->UserEntity->name, "SELECT_PLAYER_PANEL_ERROR", [
+            $menu->addLabel(Utils::getText($this->getUserEntity()->getName(), "SELECT_PLAYER_PANEL_ERROR", [
                 "needle" => $playerName
             ]));
         }

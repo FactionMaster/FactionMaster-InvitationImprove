@@ -29,4 +29,10 @@
 # For a best optimization, keep this values to 10
 limit-selected-player: 10
 limit-selected-faction: 10
+
+# These values are to be modified if you wish to use the 
+# functionality only on certain well defined panels
+alliance-impact: true
+member-impact: true
+join-inpact: true
 ...

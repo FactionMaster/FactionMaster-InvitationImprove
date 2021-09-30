@@ -35,7 +35,8 @@ namespace ShockedPlot7560\FactionMasterInvitationImprove;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 use ShockedPlot7560\FactionMaster\Extension\Extension;
-use ShockedPlot7560\FactionMaster\Main as FactionMasterMain;
+use ShockedPlot7560\FactionMaster\libs\JackMD\UpdateNotifier\UpdateNotifier;
+use ShockedPlot7560\FactionMaster\Manager\ExtensionManager;
 use ShockedPlot7560\FactionMaster\Route\RouterFactory;
 use ShockedPlot7560\FactionMasterInvitationImprove\Route\NewAllianceInvitation;
 use ShockedPlot7560\FactionMasterInvitationImprove\Route\NewInvitation;
@@ -43,14 +44,14 @@ use ShockedPlot7560\FactionMasterInvitationImprove\Route\NewMemberInvitation;
 use ShockedPlot7560\FactionMasterInvitationImprove\Route\SelectFaction;
 use ShockedPlot7560\FactionMasterInvitationImprove\Route\SelectPlayer;
 
-class Main extends PluginBase implements Extension {
+class FactionMasterInvitationImprove extends PluginBase implements Extension {
 
     private $LangConfig = [];
     private static $instance;
 
     public function onLoad(): void{
         self::$instance = $this;
-        FactionMasterMain::getInstance()->getExtensionManager()->registerExtension($this);
+        ExtensionManager::registerExtension($this);
 
         @mkdir($this->getDataFolder());
         $this->saveDefaultConfig();
@@ -61,6 +62,8 @@ class Main extends PluginBase implements Extension {
             "fr_FR" => new Config($this->getDataFolder() . "fr_FR.yml", Config::YAML),
             "en_EN" => new Config($this->getDataFolder() . "en_EN.yml", Config::YAML)
         ];
+
+        UpdateNotifier::checkUpdate($this->getDescription()->getName(), $this->getDescription()->getVersion());
     }
 
     public function execute(): void {
