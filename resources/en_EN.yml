@@ -1,3 +1,7 @@
+# DO NOT EDIT THIS LINE
+file-version: 1
+# DO NOT EDIT THIS LINE
+
 SELECT_PLAYER_PANEL_TITLE: "Please choose the player"
 SELECT_PLAYER_PANEL_CONTENT: "Choose from the drop-down list"
 SELECT_PLAYER_PANEL_ERROR: " §c>> §4No match found for the nickname: {{needle}}"

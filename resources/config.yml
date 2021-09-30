@@ -26,6 +26,10 @@
  # @link https://github.com/ShockedPlot7560
  #
 
+# DO NOT EDIT THIS LINE
+file-version: 1
+# DO NOT EDIT THIS LINE
+
 # For a best optimization, keep this values to 10
 limit-selected-player: 10
 limit-selected-faction: 10

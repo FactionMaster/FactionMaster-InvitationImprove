@@ -35,6 +35,7 @@ namespace ShockedPlot7560\FactionMasterInvitationImprove;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 use ShockedPlot7560\FactionMaster\Extension\Extension;
+use ShockedPlot7560\FactionMaster\libs\JackMD\ConfigUpdater\ConfigUpdater;
 use ShockedPlot7560\FactionMaster\libs\JackMD\UpdateNotifier\UpdateNotifier;
 use ShockedPlot7560\FactionMaster\Manager\ExtensionManager;
 use ShockedPlot7560\FactionMaster\Route\RouterFactory;
@@ -58,6 +59,9 @@ class FactionMasterInvitationImprove extends PluginBase implements Extension {
         $this->saveResource('fr_FR.yml');
         $this->saveResource('en_EN.yml');
         $this->saveResource('config.yml');
+        ConfigUpdater::checkUpdate($this, $this->getConfig(), "file-version", 1);
+        ConfigUpdater::checkUpdate($this, new Config($this->getDataFolder() . "fr_FR.yml", Config::YAML), "file-version", 1);
+        ConfigUpdater::checkUpdate($this, new Config($this->getDataFolder() . "en_EN.yml", Config::YAML), "file-version", 1);
         $this->LangConfig = [
             "fr_FR" => new Config($this->getDataFolder() . "fr_FR.yml", Config::YAML),
             "en_EN" => new Config($this->getDataFolder() . "en_EN.yml", Config::YAML)
@@ -70,10 +74,13 @@ class FactionMasterInvitationImprove extends PluginBase implements Extension {
 
     public function execute(): void {
         RouterFactory::registerRoute(new SelectPlayer());
-        RouterFactory::registerRoute(new NewMemberInvitation(), true);
+        if ($this->getConfigF("member-impact") == true)
+            RouterFactory::registerRoute(new NewMemberInvitation(), true);
         RouterFactory::registerRoute(new SelectFaction());
-        RouterFactory::registerRoute(new NewInvitation(), true);
-        RouterFactory::registerRoute(new NewAllianceInvitation(), true);
+        if ($this->getConfigF("join-impact") == true)
+            RouterFactory::registerRoute(new NewInvitation(), true);
+        if ($this->getConfigF("alliance-impact") == true)
+            RouterFactory::registerRoute(new NewAllianceInvitation(), true);
     }
 
     public function getLangConfig(): array {
