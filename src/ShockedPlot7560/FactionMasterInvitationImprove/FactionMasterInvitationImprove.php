@@ -62,7 +62,9 @@ class FactionMasterInvitationImprove extends PluginBase implements Extension {
             "fr_FR" => new Config($this->getDataFolder() . "fr_FR.yml", Config::YAML),
             "en_EN" => new Config($this->getDataFolder() . "en_EN.yml", Config::YAML)
         ];
+    }
 
+    public function onEnable() {
         UpdateNotifier::checkUpdate($this->getDescription()->getName(), $this->getDescription()->getVersion());
     }
 
