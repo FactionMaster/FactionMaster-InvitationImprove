@@ -1,6 +1,6 @@
 name: FactionMasterInvitationImprove
 author: ShockedPlot7560
-version: 1.2.0
+version: 1.2.1
 api: 3.17.7
 main: ShockedPlot7560\FactionMasterInvitationImprove\FactionMasterInvitationImprove
 depend: ["FactionMaster"]

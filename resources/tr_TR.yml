@@ -1,0 +1,10 @@
+# DO NOT EDIT THIS LINE
+file-version: 1
+# DO NOT EDIT THIS LINE
+
+SELECT_PLAYER_PANEL_TITLE: "Lütfen bir oyuncu seçin"
+SELECT_PLAYER_PANEL_CONTENT: "Açılır listeden seçin"
+SELECT_PLAYER_PANEL_ERROR: " §c>> §4Böyle bir oyuncu adı için eşleşme bulunamadı: {{needle}}"
+SELECT_FACTION_PANEL_TITLE: "Lütfen klanı seçin"
+SELECT_FACTION_PANEL_CONTENT: "Açılır listeden seçin"
+SELECT_FACTION_PANEL_ERROR: " §c>> §4Ad için eşleşme bulunamadı: {{needle}}"
