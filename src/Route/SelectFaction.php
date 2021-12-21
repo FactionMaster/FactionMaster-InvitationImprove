@@ -36,7 +36,7 @@ use InvalidArgumentException;
 use pocketmine\Player;
 use ShockedPlot7560\FactionMaster\API\MainAPI;
 use ShockedPlot7560\FactionMaster\Database\Entity\UserEntity;
-use ShockedPlot7560\FactionMaster\libs\jojoe77777\FormAPI\CustomForm;
+use jojoe77777\FormAPI\CustomForm;
 use ShockedPlot7560\FactionMaster\Route\Route;
 use ShockedPlot7560\FactionMaster\Route\RouteBase;
 use ShockedPlot7560\FactionMaster\Utils\Utils;
