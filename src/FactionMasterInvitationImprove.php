@@ -32,11 +32,11 @@
 
 namespace ShockedPlot7560\FactionMasterInvitationImprove;
 
+use JackMD\ConfigUpdater\ConfigUpdater;
+use JackMD\UpdateNotifier\UpdateNotifier;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 use ShockedPlot7560\FactionMaster\Extension\Extension;
-use JackMD\ConfigUpdater\ConfigUpdater;
-use JackMD\UpdateNotifier\UpdateNotifier;
 use ShockedPlot7560\FactionMaster\Manager\ExtensionManager;
 use ShockedPlot7560\FactionMaster\Route\RouterFactory;
 use ShockedPlot7560\FactionMasterInvitationImprove\Route\NewAllianceInvitation;
@@ -71,7 +71,7 @@ class FactionMasterInvitationImprove extends PluginBase implements Extension {
 		];
 	}
 
-	public function onEnable() {
+	public function onEnable(): void {
 		UpdateNotifier::checkUpdate($this->getDescription()->getName(), $this->getDescription()->getVersion());
 	}
 

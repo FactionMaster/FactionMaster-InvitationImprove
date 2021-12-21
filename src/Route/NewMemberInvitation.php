@@ -32,7 +32,7 @@
 
 namespace ShockedPlot7560\FactionMasterInvitationImprove\Route;
 
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\Server;
 use ShockedPlot7560\FactionMaster\API\MainAPI;
 use ShockedPlot7560\FactionMaster\Database\Entity\FactionEntity;
@@ -57,7 +57,7 @@ class NewMemberInvitation extends MembersSendInvitationRoute {
 			Utils::processMenu(RouterFactory::get(SelectPlayer::SLUG), $player, [
 				$data[1],
 				function (string $playerName) use ($player) {
-					$targetName = Server::getInstance()->getPlayer($playerName);
+					$targetName = Server::getInstance()->getPlayerByPrefix($playerName);
 					$targetName = $targetName === null ? $playerName : $targetName->getName();
 					$userRequested = MainAPI::getUser($targetName);
 					$faction = $this->getFaction();
