@@ -40,7 +40,6 @@ use ShockedPlot7560\FactionMaster\Event\FactionJoinEvent;
 use ShockedPlot7560\FactionMaster\Event\InvitationAcceptEvent;
 use ShockedPlot7560\FactionMaster\Event\InvitationSendEvent;
 use ShockedPlot7560\FactionMaster\Route\JoinSendInvitationRoute;
-use ShockedPlot7560\FactionMaster\Route\MainRoute;
 use ShockedPlot7560\FactionMaster\Route\RouterFactory;
 use ShockedPlot7560\FactionMaster\Task\MenuSendTask;
 use ShockedPlot7560\FactionMaster\Utils\Ids;
@@ -71,10 +70,10 @@ class NewInvitation extends JoinSendInvitationRoute {
 										},
 										function () use ($player, $factionRequested) {
 											(new FactionJoinEvent($player, $factionRequested))->call();
-											Utils::processMenu(RouterFactory::get(MainRoute::SLUG), $player, [Utils::getText($player->getName(), "SUCCESS_JOIN_FACTION", ['factionName' => $factionRequested->getName()])]);
+											Utils::processMenu(RouterFactory::get(self::MAIN_ROUTE), $player, [Utils::getText($player->getName(), "SUCCESS_JOIN_FACTION", ['factionName' => $factionRequested->getName()])]);
 										},
 										function () use ($player) {
-											Utils::processMenu(RouterFactory::get(self::SLUG), $player, [Utils::getText($player->getName(), "ERROR")]);
+											Utils::processMenu($this, $player, [Utils::getText($player->getName(), "ERROR")]);
 										}
 									));
 									if (MainAPI::areInInvitation($factionRequested->getName(), $player->getName(), "member")) {
@@ -84,7 +83,7 @@ class NewInvitation extends JoinSendInvitationRoute {
 									}
 									break;
 								case Ids::PRIVATE_VISIBILITY:
-									Utils::processMenu(RouterFactory::get(self::SLUG), $player, [Utils::getText($player->getName(), "FACTION_DONT_ACCEPT_INVITATION")]);
+									Utils::processMenu($this, $player, [Utils::getText($player->getName(), "FACTION_DONT_ACCEPT_INVITATION")]);
 									break;
 								case Ids::INVITATION_VISIBILITY:
 									if (MainAPI::areInInvitation($targetName, $player->getName(), InvitationEntity::MEMBER_INVITATION)) {
@@ -103,15 +102,15 @@ class NewInvitation extends JoinSendInvitationRoute {
 													},
 													function () use ($request, $player) {
 														(new InvitationAcceptEvent($player, $request))->call();
-														Utils::processMenu(RouterFactory::get(MainRoute::SLUG), $player, [Utils::getText($player->getName(), "SUCCESS_JOIN_FACTION", ['factionName' => $request->getSenderString()])]);
+														Utils::processMenu(RouterFactory::get(self::MAIN_ROUTE), $player, [Utils::getText($player->getName(), "SUCCESS_JOIN_FACTION", ['factionName' => $request->getSenderString()])]);
 													},
 													function () use ($player) {
-														Utils::processMenu(RouterFactory::get(self::SLUG), $player, [Utils::getText($player->getName(), "ERROR")]);
+														Utils::processMenu($this, $player, [Utils::getText($player->getName(), "ERROR")]);
 													}
 												));
 											},
 											function () use ($player) {
-												Utils::processMenu(RouterFactory::get(self::SLUG), $player, [Utils::getText($player->getName(), "ERROR")]);
+												Utils::processMenu($this, $player, [Utils::getText($player->getName(), "ERROR")]);
 											}
 										));
 									} elseif (!MainAPI::areInInvitation($player->getName(), $targetName, InvitationEntity::MEMBER_INVITATION)) {
@@ -131,22 +130,22 @@ class NewInvitation extends JoinSendInvitationRoute {
 												Utils::processMenu($this->getBackRoute(), $player, [Utils::getText($player->getName(), "SUCCESS_SEND_INVITATION", ['name' => $targetName])]);
 											},
 											function () use ($player) {
-												Utils::processMenu(RouterFactory::get(self::SLUG), $player, [Utils::getText($player->getName(), "ERROR")]);
+												Utils::processMenu($this, $player, [Utils::getText($player->getName(), "ERROR")]);
 											}
 										));
 									} else {
-										Utils::processMenu(RouterFactory::get(self::SLUG), $player, [Utils::getText($player->getName(), "ALREADY_PENDING_INVITATION")]);
+										Utils::processMenu($this, $player, [Utils::getText($player->getName(), "ALREADY_PENDING_INVITATION")]);
 									}
 									break;
 								}
 							} else {
-								Utils::processMenu(RouterFactory::get(self::SLUG), $player, [Utils::getText($player->getName(), "ALREADY_IN_THIS_FACTION")]);
+								Utils::processMenu($this, $player, [Utils::getText($player->getName(), "ALREADY_IN_THIS_FACTION")]);
 							}
 						} else {
-							Utils::processMenu(RouterFactory::get(self::SLUG), $player, [Utils::getText($player->getName(), "MAX_PLAYER_REACH")]);
+							Utils::processMenu($this, $player, [Utils::getText($player->getName(), "MAX_PLAYER_REACH")]);
 						}
 					} else {
-						Utils::processMenu(RouterFactory::get(self::SLUG), $player, [Utils::getText($player->getName(), "FACTION_DONT_EXIST")]);
+						Utils::processMenu($this, $player, [Utils::getText($player->getName(), "FACTION_DONT_EXIST")]);
 					}
 				},
 				$this->getBackRoute()

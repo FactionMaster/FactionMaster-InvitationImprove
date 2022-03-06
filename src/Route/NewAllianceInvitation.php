@@ -84,12 +84,12 @@ class NewAllianceInvitation extends AllianceSendInvitationRoute {
 													Utils::processMenu($this->getBackRoute(), $player, [Utils::getText($player->getName(), "SUCCESS_ACCEPT_REQUEST", ['name' => $invit->getSenderString()])]);
 												},
 												function () use ($player) {
-													Utils::processMenu(RouterFactory::get(self::SLUG), $player, [Utils::getText($player->getName(), "ERROR")]);
+													Utils::processMenu($this, $player, [Utils::getText($player->getName(), "ERROR")]);
 												}
 											));
 										},
 										function () use ($player) {
-											Utils::processMenu(RouterFactory::get(self::SLUG), $player, [Utils::getText($player->getName(), "ERROR")]);
+											Utils::processMenu($this, $player, [Utils::getText($player->getName(), "ERROR")]);
 										}
 									));
 								} elseif (!MainAPI::areInInvitation($faction->getName(), $targetName, InvitationEntity::ALLIANCE_INVITATION)) {
@@ -109,20 +109,20 @@ class NewAllianceInvitation extends AllianceSendInvitationRoute {
 											Utils::processMenu($this->getBackRoute(), $player, [Utils::getText($player->getName(), "SUCCESS_SEND_INVITATION", ['name' => $factionName])]);
 										},
 										function () use ($player) {
-											Utils::processMenu(RouterFactory::get(self::SLUG), $player, [Utils::getText($player->getName(), "ERROR")]);
+											Utils::processMenu($this, $player, [Utils::getText($player->getName(), "ERROR")]);
 										}
 									));
 								} else {
-									Utils::processMenu(RouterFactory::get(self::SLUG), $player, [Utils::getText($player->getName(), "ALREADY_PENDING_INVITATION")]);
+									Utils::processMenu($this, $player, [Utils::getText($player->getName(), "ALREADY_PENDING_INVITATION")]);
 								}
 							} else {
-								Utils::processMenu(RouterFactory::get(self::SLUG), $player, [Utils::getText($player->getName(), "MAX_ALLY_REACH_OTHER")]);
+								Utils::processMenu($this, $player, [Utils::getText($player->getName(), "MAX_ALLY_REACH_OTHER")]);
 							}
 						} else {
-							Utils::processMenu(RouterFactory::get(self::SLUG), $player, [Utils::getText($player->getName(), "MAX_ALLY_REACH")]);
+							Utils::processMenu($this, $player, [Utils::getText($player->getName(), "MAX_ALLY_REACH")]);
 						}
 					} else {
-						Utils::processMenu(RouterFactory::get(self::SLUG), $player, [Utils::getText($player->getName(), "FACTION_DONT_EXIST")]);
+						Utils::processMenu($this, $player, [Utils::getText($player->getName(), "FACTION_DONT_EXIST")]);
 					}
 				},
 				$this->getBackRoute()
