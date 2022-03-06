@@ -1,0 +1,10 @@
+# DO NOT EDIT THIS LINE
+file-version: 1
+# DO NOT EDIT THIS LINE
+
+SELECT_PLAYER_PANEL_TITLE: "Por favor escolha o jogador"
+SELECT_PLAYER_PANEL_CONTENT: "Escolha na lista suspensa"
+SELECT_PLAYER_PANEL_ERROR: " §c>> §4Nenhuma correspondência encontrada para o nome: {{needle}}"
+SELECT_FACTION_PANEL_TITLE: "Por favor, escolha a facção"
+SELECT_FACTION_PANEL_CONTENT: "Escolha na lista suspensa"
+SELECT_FACTION_PANEL_ERROR: " §c>> §4Nenhuma correspondência encontrada para o nome: {{needle}}"
