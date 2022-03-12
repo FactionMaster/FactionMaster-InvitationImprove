@@ -1,0 +1,10 @@
+# НЕ ТРОГАТЬ
+file-version: 1
+# НЕ ТРОГАТЬ
+
+SELECT_PLAYER_PANEL_TITLE: "Пожалуйста, выберите игрока"
+SELECT_PLAYER_PANEL_CONTENT: "Выберите из выпадающего списка"
+SELECT_PLAYER_PANEL_ERROR: " §c>> §4Совпадение с ником не найдено: {{needle}}"
+SELECT_FACTION_PANEL_TITLE: "Пожалуйста, выберите фракцию"
+SELECT_FACTION_PANEL_CONTENT: "Выберите из выпадающего списка"
+SELECT_FACTION_PANEL_ERROR: " §c>> §4Совпадение с именем не найдено: {{needle}}"
