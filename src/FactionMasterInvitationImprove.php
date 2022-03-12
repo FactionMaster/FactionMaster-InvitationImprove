@@ -60,17 +60,20 @@ class FactionMasterInvitationImprove extends PluginBase implements Extension {
 		$this->saveResource('en_EN.yml');
 		$this->saveResource('tr_TR.yml');
 		$this->saveResource('pt_BR.yml');
+		$this->saveResource('ru_RU.yml');
 		$this->saveResource('config.yml');
 		ConfigUpdater::checkUpdate($this, $this->getConfig(), "file-version", 1);
 		ConfigUpdater::checkUpdate($this, new Config($this->getDataFolder() . "fr_FR.yml", Config::YAML), "file-version", 1);
 		ConfigUpdater::checkUpdate($this, new Config($this->getDataFolder() . "en_EN.yml", Config::YAML), "file-version", 1);
 		ConfigUpdater::checkUpdate($this, new Config($this->getDataFolder() . "tr_TR.yml", Config::YAML), "file-version", 1);
 		ConfigUpdater::checkUpdate($this, new Config($this->getDataFolder() . "pt_BR.yml", Config::YAML), "file-version", 1);
+		ConfigUpdater::checkUpdate($this, new Config($this->getDataFolder() . "ru_RU.yml", Config::YAML), "file-version", 1);
 		$this->LangConfig = [
 			"FR" => new Config($this->getDataFolder() . "fr_FR.yml", Config::YAML),
 			"TR" => new Config($this->getDataFolder() . "tr_TR.yml", Config::YAML),
 			"EN" => new Config($this->getDataFolder() . "en_EN.yml", Config::YAML),
-			"BR" => new Config($this->getDataFolder() . "pt_BR.yml", Config::YAML)
+			"BR" => new Config($this->getDataFolder() . "pt_BR.yml", Config::YAML),
+			"RU" => new Config($this->getDataFolder() . "ru_RU.yml", Config::YAML)
 		];
 	}
 
