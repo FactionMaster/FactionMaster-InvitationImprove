@@ -1,0 +1,10 @@
+# DO NOT EDIT THIS LINE
+file-version: 1
+# DO NOT EDIT THIS LINE
+
+SELECT_PLAYER_PANEL_TITLE: "Por favor, elije un jugador"
+SELECT_PLAYER_PANEL_CONTENT: "Elije en la lista desplegable"
+SELECT_PLAYER_PANEL_ERROR: " §c>> §4No se ha encontrado ninguna coincidencia con ese apodo: {{needle}}"
+SELECT_FACTION_PANEL_TITLE: "Por favor, elije una facción"
+SELECT_FACTION_PANEL_CONTENT: "Elije en la lista desplegable"
+SELECT_FACTION_PANEL_ERROR: " §c>> §4No se ha encontrado ninguna coincidencia con ese apodo: {{needle}}"
