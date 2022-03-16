@@ -60,6 +60,7 @@ class FactionMasterInvitationImprove extends PluginBase implements Extension {
 		$this->saveResource('en_EN.yml');
 		$this->saveResource('tr_TR.yml');
 		$this->saveResource('pt_BR.yml');
+                $this->saveResource('es_ES.yml');
 		$this->saveResource('ru_RU.yml');
 		$this->saveResource('config.yml');
 		ConfigUpdater::checkUpdate($this, $this->getConfig(), "file-version", 1);
